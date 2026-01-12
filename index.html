@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BOOP BOOP BOOP 🎉</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Comic Sans MS", "Chalkboard SE", sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 30%, #a1c4fd 70%, #c2e9fb 100%);
+      min-height: 100vh;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(4rem, 12vw, 9rem);
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 
+        0 0 10px #ff6bcb,
+        0 0 30px #ff6bcb,
+        0 0 60px #ff1493,
+        6px 6px 0 #ffeb3b,
+        -6px -6px 0 #00e5ff;
+      margin: 40px 0 20px;
+      animation: bounce 2.2s infinite ease-in-out, rainbow 8s linear infinite;
+      letter-spacing: -2px;
+      line-height: 0.9;
+    }
+
+    .subtitle {
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      color: white;
+      margin-bottom: 40px;
+      text-shadow: 3px 3px 0 #ff6b6b;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .boop-area {
+      position: relative;
+      margin: 60px auto;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .main-image {
+      width: 100%;
+      max-width: 720px;
+      border-radius: 24px;
+      box-shadow: 
+        0 20px 40px rgba(0,0,0,0.25),
+        0 0 0 12px #ffffff88,
+        inset 0 0 30px #ffffff44;
+      transform: perspective(800px) rotateX(8deg);
+      animation: 
+        wobble 6s ease-in-out infinite,
+        pulse-glow 3.5s ease-in-out infinite alternate;
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: 2.5rem;
+      color: #ff3366;
+      pointer-events: none;
+      animation: float-away 8s forwards linear;
+      opacity: 0;
+      z-index: 5;
+    }
+
+    /* Animations */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-30px); }
+    }
+
+    @keyframes rainbow {
+      0%   { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-20px); }
+    }
+
+    @keyframes wobble {
+      0%,100% { transform: rotate(-3deg) perspective(800px) rotateX(6deg); }
+      50%     { transform: rotate(3deg)  perspective(800px) rotateX(10deg); }
+    }
+
+    @keyframes pulse-glow {
+      from { box-shadow: 0 20px 40px rgba(0,0,0,0.25), 0 0 30px #ff69b4; }
+      to   { box-shadow: 0 30px 60px rgba(0,0,0,0.35), 0 0 60px #ff1493, 0 0 100px #ff69b4; }
+    }
+
+    @keyframes float-away {
+      0%   { opacity: 0; transform: scale(0.5) translateY(0); }
+      10%  { opacity: 1; transform: scale(1.3) translateY(-20px); }
+      100% { opacity: 0; transform: scale(1.8) translateY(-280px) translateX(60px); }
+    }
+
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 12px white;
+      animation: twinkle 4s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes twinkle {
+      0%,100% { opacity: 0; transform: scale(0); }
+      50%     { opacity: 0.9; transform: scale(1.4); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sparkles" id="sparkles"></div>
+
+  <div class="container">
+    <h1>BOOP</h1>
+    <div class="subtitle">boop boop boop~ ♡</div>
+
+    <div class="boop-area">
+      <!-- Paste your image URL here ↓↓↓ -->
+      <img 
+        src="YOUR_BOOP_IMAGE_URL_HERE.png" 
+        alt="BOOP cute characters" 
+        class="main-image"
+        id="boopImage"
+      >
+    </div>
+
+    <p style="font-size:2.2rem; margin:60px 0; color:white; text-shadow:3px 3px 0 #ff3366;">
+      tap / click the picture to <strong>BOOP!</strong> 💖🐸🐶
+    </p>
+  </div>
+
+  <script>
+    // Floating hearts when clicking the image
+    const boopImage = document.getElementById('boopImage');
+    const hearts = ['💖','❤️','💕','💗','💓','💞','✨','♡','🩷'];
+
+    boopImage.addEventListener('click', (e) => {
+      for(let i = 0; i < 8; i++) {
+        setTimeout(() => {
+          createHeart(e.clientX, e.clientY);
+        }, i * 80);
+      }
+    });
+
+    function createHeart(x, y) {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      heart.style.left = x + 'px';
+      heart.style.top = y + 'px';
+      document.body.appendChild(heart);
+
+      // Random horizontal drift
+      const drift = (Math.random() - 0.5) * 120;
+      heart.style.transform += ` translateX(${drift}px)`;
+
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    // Sparkles background
+    function createSparkle() {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = Math.random() * 100 + 'vw';
+      s.style.top = Math.random() * 100 + 'vh';
+      s.style.animationDelay = Math.random() * 4 + 's';
+      document.getElementById('sparkles').appendChild(s);
+      
+      setTimeout(() => s.remove(), 12000);
+    }
+
+    setInterval(createSparkle, 400);
+    // initial burst
+    for(let i=0; i<30; i++) setTimeout(createSparkle, i*80);
+  </script>
+
+</body>
+</html>
