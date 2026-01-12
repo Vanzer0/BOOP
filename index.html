@@ -5,16 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOOPIE - The Joyful Meme Coin</title>
     <style>
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(135deg, #ff69b4, #ffd700, #00ff00, #00bfff);
-            background-size: 400% 400%;
-            animation: rainbow 10s ease infinite;
-            color: #ffffff;
-            text-align: center;
+        :root {
+            --primary: #ff69b4;
+            --accent: #ffd700;
+            --text: #ffffff;
+            --shadow: rgba(0,0,0,0.6);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            background: linear-gradient(135deg, #ff69b4, #ff1493, #ffd700, #00ff88, #00bfff);
+            background-size: 300% 300%;
+            animation: rainbow 12s ease infinite;
+            color: var(--text);
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
         }
 
         @keyframes rainbow {
@@ -24,37 +36,38 @@
         }
 
         h1 {
-            font-size: 5em;
-            margin-top: 50px;
-            animation: bounce 2s infinite;
-            text-shadow: 0 0 10px #ff1493, 0 0 20px #ff69b4;
+            font-size: clamp(3.5rem, 12vw, 7rem);
+            font-weight: bold;
+            margin: 0.4em 0 0.2em;
+            text-shadow: 
+                0 0 15px #ff1493,
+                0 0 30px #ff69b4,
+                4px 4px 0 var(--shadow),
+                -4px -4px 0 var(--shadow);
+            line-height: 1.1;
+            animation: bounce 2.2s infinite;
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-30px); }
-            60% { transform: translateY(-15px); }
+            40% { transform: translateY(-25px); }
+            60% { transform: translateY(-12px); }
         }
 
-        p {
-            font-size: 1.5em;
-            margin: 20px;
-            animation: fadeIn 3s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem 3rem;
         }
 
         .logo {
-            width: 300px;
+            width: clamp(180px, 45vw, 320px);
             height: auto;
-            margin: 20px auto;
+            margin: 1.5rem auto;
             display: block;
-            animation: spin 5s linear infinite;
             border-radius: 50%;
-            box-shadow: 0 0 20px #ffd700;
+            box-shadow: 0 0 30px rgba(255,215,0,0.7);
+            animation: spin 14s linear infinite;
         }
 
         @keyframes spin {
@@ -62,62 +75,96 @@
             to { transform: rotate(360deg); }
         }
 
+        .tagline {
+            font-size: clamp(1.3rem, 5vw, 2rem);
+            margin: 1rem 0 1.5rem;
+            text-shadow: 2px 2px 6px var(--shadow);
+            line-height: 1.4;
+        }
+
+        .subtitle {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px var(--shadow);
+        }
+
         .socials {
-            margin: 30px;
-            font-size: 1.2em;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
         .socials a {
-            color: #ffffff;
+            color: white;
             text-decoration: none;
-            margin: 0 15px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            transition: background 0.3s;
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
+            padding: 0.8rem 1.6rem;
+            background: rgba(255,255,255,0.18);
+            border-radius: 999px;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
         }
 
         .socials a:hover {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .confetti {
-            position: absolute;
+            position: fixed;
             width: 10px;
             height: 10px;
-            background: #ff0000;
-            animation: confetti-fall 5s linear infinite;
+            pointer-events: none;
+            animation: confetti-fall 6s linear infinite;
+            z-index: 10;
         }
 
         @keyframes confetti-fall {
-            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(1080deg); opacity: 0; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { margin-top: 0.6em; }
+            .container { padding: 1rem 0.8rem 4rem; }
+            .socials { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
-    <h1>BOOPIE!</h1>
-    <img src="your-boopie-logo.png" alt="BOOPIE" class="logo"> <!-- Replace 'your-boopie-logo.png' with your attached image file name or URL -->
-    <p>Welcome to BOOPIE, the most fun and joyful meme coin ever! 🎉🐶💰</p>
-    <p>Get ready for endless boops and laughs! Join the community and spread the joy!</p>
-    <div class="socials">
-        <a href="#">X: TBA</a>
-        <a href="#">Tg: TBA</a>
+    <div class="container">
+        <h1>BOOPIE!</h1>
+        <img src="your-boopie-logo.png" alt="BOOPIE" class="logo">
+        
+        <p class="tagline">The most joyful, boop-tastic meme coin in the universe! 🎉🐾💖</p>
+        <p class="subtitle">Endless boops, maximum vibes, zero seriousness.<br>Get in early and join the fun!</p>
+
+        <div class="socials">
+            <a href="#">X → TBA</a>
+            <a href="#">Telegram → TBA</a>
+        </div>
     </div>
 
     <script>
-        // Add some confetti for extra joy
         function createConfetti() {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.background = '#' + Math.floor(Math.random()*16777215).toString(16);
-            confetti.style.animationDelay = Math.random() * 5 + 's';
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 5000);
+            const c = document.createElement('div');
+            c.className = 'confetti';
+            c.style.left = Math.random() * 100 + 'vw';
+            c.style.background = '#' + Math.floor(Math.random()*16777215).toString(16);
+            c.style.width = (6 + Math.random()*10) + 'px';
+            c.style.height = c.style.width;
+            c.style.animationDuration = (4 + Math.random()*5) + 's';
+            c.style.animationDelay = Math.random() * 4 + 's';
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 9000);
         }
 
-        setInterval(createConfetti, 200);
+        setInterval(createConfetti, 180);
     </script>
 </body>
 </html>
